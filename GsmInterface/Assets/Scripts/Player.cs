@@ -4,6 +4,10 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+/// <summary>
+/// 플레이어의 전체 로직을 모아주는 클래스
+/// </summary>
 public class Player : MonoBehaviour, IPlayerMove, IPlayerInput
 {
     private Vector2 vec2;
@@ -11,7 +15,7 @@ public class Player : MonoBehaviour, IPlayerMove, IPlayerInput
     [SerializeField] float speed;
     public float Speed => speed;
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move(vec2);
     }
@@ -24,5 +28,10 @@ public class Player : MonoBehaviour, IPlayerMove, IPlayerInput
     public void OnMoveInput(InputValue value)
     {
         vec2 = value.Get<Vector2>();
+    }
+
+    public void OnAttackInput(InputValue value)
+    {
+
     }
 }
