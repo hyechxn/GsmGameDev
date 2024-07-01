@@ -14,3 +14,16 @@ public interface IPlayerMove
     }
     void Move(Vector2 moveDirection);
 }
+
+
+/// <summary>
+///	바라볼 위치을 받아 회전을 하고 회전속도 정보를 저장합니다.
+/// </summary>
+public interface IPlayerRotate
+{
+    public float RotationSpeed
+    {
+        get;
+    }
+    void Rotate(Vector3 targetPos);
+}
