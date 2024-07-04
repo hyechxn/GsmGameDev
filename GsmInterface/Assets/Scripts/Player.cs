@@ -11,7 +11,6 @@ using UnityEngine.UI;
 /// </summary>
 public class Player : MonoBehaviour
 {
-    private Vector2 vec2;
 
     PlayerMove playerMove;
     PlayerRotate playerRotate;
