@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour, IDamage
 {
-    public Rigidbody2D Rigid { 
-        get {
-                return rigid; 
+    public Rigidbody2D Rigid
+    {
+        get
+        {
+            return rigid;
         }
         private set { rigid = value; }
     }
@@ -18,10 +20,11 @@ public class Bullet : MonoBehaviour, IDamage
     [SerializeField] float damage = 1;
     public float Amount => damage;
 
+    [SerializeField] float lifeTime;
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, lifeTime);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

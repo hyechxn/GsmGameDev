@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IPlayerAttack
 {
-    public void Attack();
+    public void TryAttack();
+    public IEnumerator RapidAttack();
+    public IEnumerator Attack();
 }

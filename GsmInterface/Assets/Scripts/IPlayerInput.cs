@@ -10,9 +10,5 @@ public interface IPlayerInput
 {
     public void OnMoveInput(InputValue value);
     public void OnAttackInput(InputValue value);
-
-    public Vector3 MousePosInput()
-    {
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
+    public void OnScrolling(InputValue value);
 }

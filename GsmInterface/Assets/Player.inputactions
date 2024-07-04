@@ -16,12 +16,21 @@
                 },
                 {
                     "name": "AttackInput",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "480a848b-7494-4bb1-9478-6bf34e5d285a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Scrolling",
+                    "type": "Button",
+                    "id": "5a74f49f-27a4-4682-b856-7d3e79012d3f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -88,6 +97,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "AttackInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c6bf2ef-06e8-45b7-813e-9623c367e759",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Scrolling",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

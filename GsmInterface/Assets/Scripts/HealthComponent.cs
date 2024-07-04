@@ -21,5 +21,7 @@ public class HealthComponent : MonoBehaviour, IDamageReceiver
     public void GetDamage(IDamage damage)
     {
         Health -= damage.Amount;
+        if (Health <= 0)
+            Destroy(gameObject);
     }
 }
