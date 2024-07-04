@@ -30,8 +30,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position += playerMove.GetMoveDirection();
-        transform.rotation = playerRotate.GetRotation(transform);
+        playerMove.Move();
+        playerRotate.Rotate();
 
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
 {
-    private bool isAttack;
+    private bool isAttacking;
     private bool isRapidMode;
 
     [SerializeField] float attackCooltime;
@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
 
     public void OnAttackInput(InputValue value)
     {
-        isAttack = !isAttack;
+        isAttacking = !isAttacking;
     }
 
     public void OnScrolling(InputValue value)
@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
     
     public void TryAttack()
     {
-        if (isAttack && curAttackCoroutine == null)
+        if (isAttacking && curAttackCoroutine == null)
         {
             if (isRapidMode)
             {

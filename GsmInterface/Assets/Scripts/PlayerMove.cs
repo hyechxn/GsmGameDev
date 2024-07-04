@@ -24,4 +24,9 @@ public class PlayerMove : MonoBehaviour, IPlayerMoveInput, IPlayerMove
     {
         return saveInputVec2 * Time.deltaTime * Speed;
     }
+
+    public void Move()
+    {
+        transform.position += GetMoveDirection();
+    }
 }

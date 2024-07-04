@@ -26,4 +26,9 @@ public class PlayerRotate : MonoBehaviour, IPlayerRotateInput, IPlayerRotate
         return Quaternion.Lerp(currrentTransform.rotation,
             Quaternion.Euler(0, 0, rotZ - 90f), rotationSpeed * Time.deltaTime);
     }
+
+    public void Rotate()
+    {
+        transform.rotation = GetRotation(transform);
+    }
 }
