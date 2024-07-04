@@ -12,5 +12,22 @@ public interface IPlayerMove
     {
         get;
     }
-    void Move(Vector2 moveDirection);
+    Vector3 GetMoveDirection();
+
+    public void Move();
+}
+
+
+/// <summary>
+///	바라볼 위치을 받아 회전을 하고 회전속도 정보를 저장합니다.
+/// </summary>
+public interface IPlayerRotate
+{
+    public float RotationSpeed
+    {
+        get;
+    }
+    public Quaternion GetRotation(Transform currrentTransform);
+
+    public void Rotate();
 }
