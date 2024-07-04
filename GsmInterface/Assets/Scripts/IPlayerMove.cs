@@ -12,7 +12,7 @@ public interface IPlayerMove
     {
         get;
     }
-    void Move(Vector2 moveDirection);
+    Vector3 GetMoveDirection();
 }
 
 
@@ -25,5 +25,5 @@ public interface IPlayerRotate
     {
         get;
     }
-    void Rotate(Vector3 targetPos);
+    public Quaternion GetRotation(Transform currrentTransform);
 }
