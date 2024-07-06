@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 ///	이동 방향을 받아 이동을 하고 속도 정보를 저장합니다.
 /// </summary>
-public interface IPlayerMove
+public interface IMove
 {
     public float Speed
     {
@@ -21,7 +21,7 @@ public interface IPlayerMove
 /// <summary>
 ///	바라볼 위치을 받아 회전을 하고 회전속도 정보를 저장합니다.
 /// </summary>
-public interface IPlayerRotate
+public interface IRotate
 {
     public float RotationSpeed
     {

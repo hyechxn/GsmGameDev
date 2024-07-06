@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
 
     public IEnumerator RapidAttack()
     {
-        var bullet = Instantiate(Resources.Load("Prefabs/RapidBullet"), transform.position,
+        var bullet = Instantiate(Resources.Load("Prefabs/PlayerBullets/RapidBullet"), transform.position,
             Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z));
         if ((bullet as GameObject).TryGetComponent<Bullet>(out var bullet1))
         {
@@ -58,13 +58,13 @@ public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
 
     public IEnumerator Attack()
     {
-        var bullet = Instantiate(Resources.Load("Prefabs/Bullet"), transform.position,
+        var bullet = Instantiate(Resources.Load("Prefabs/PlayerBullets/Bullet"), transform.position,
             Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z));
         if ((bullet as GameObject).TryGetComponent<Bullet>(out var bullet1))
         {
             bullet1.Rigid.velocity = transform.up * bullet1.BulletSpeed;
         }
-        yield return new WaitForSeconds(AttackCooltime * 10);
+        yield return new WaitForSeconds(AttackCooltime * 6.6f);
         curAttackCoroutine = null;
     }
 }

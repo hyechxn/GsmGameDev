@@ -11,13 +11,16 @@ using UnityEngine.UI;
 /// </summary>
 public class Player : MonoBehaviour
 {
+    public static Player instance;
 
     PlayerMove playerMove;
     PlayerRotate playerRotate;
     PlayerAttack playerAttack;
 
-    private void Start()
+    private void Awake()
     {
+        instance = this;
+
         playerMove = GetComponent<PlayerMove>();
         playerRotate = GetComponent<PlayerRotate>();
         playerAttack = GetComponent<PlayerAttack>();

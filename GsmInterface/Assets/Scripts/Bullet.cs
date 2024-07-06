@@ -27,9 +27,9 @@ public class Bullet : MonoBehaviour, IDamage
         Destroy(gameObject, lifeTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.TryGetComponent<IDamageReceiver>(out var damageReceiver))
+        if (other.TryGetComponent<IDamageReceiver>(out var damageReceiver))
         {
             damageReceiver.GetDamage(this);
             Destroy(gameObject);

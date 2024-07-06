@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// 플레이어의 이동로직을 구현하는 클래스
 /// </summary>
-public class PlayerMove : MonoBehaviour, IPlayerMoveInput, IPlayerMove
+public class PlayerMove : MonoBehaviour, IPlayerMoveInput, IMove
 {
 
     [SerializeField] float speed;

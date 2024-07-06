@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// 플레이어의 회전로직을 구현하는 클래스
 /// </summary>
-public class PlayerRotate : MonoBehaviour, IPlayerRotateInput, IPlayerRotate
+public class PlayerRotate : MonoBehaviour, IPlayerRotateInput, IRotate
 {
     [SerializeField] float rotationSpeed;
 
