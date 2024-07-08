@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-public interface IPowerUpReceiver
+public interface IPowerReceiver
 {
     public List<GameObject> PowerUpBullets { get; }
-    public void PowerChange(IPowerUpProvider powerUpProvider);
+    public void PowerChange(IPowerProvider powerUpProvider);
 }
