@@ -7,15 +7,19 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// 플레이어의 공격로직을 구현하는 클래스
 /// </summary>
-public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
+public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack, IPowerUpReceiver
 {
     private bool isAttacking;
     private bool isRapidMode;
 
+    [SerializeField] private List<GameObject> powerUpBullets = new List<GameObject>();
     [SerializeField] float attackCooltime;
+    [SerializeField] private Coroutine curAttackCoroutine;
+    [SerializeField] private int powerLevel = 1;
     private float AttackCooltime => attackCooltime;
 
-    [SerializeField] private Coroutine curAttackCoroutine;
+    public List<GameObject> PowerUpBullets => powerUpBullets;
+
 
     public void OnAttackInput(InputValue value)
     {
@@ -46,7 +50,7 @@ public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
 
     public IEnumerator RapidAttack()
     {
-        var bullet = Instantiate(Resources.Load("Prefabs/PlayerBullets/RapidBullet"), transform.position,
+        var bullet = Instantiate(Resources.Load($"Prefabs/PlayerBullets/{powerUpBullets[powerLevel]}"), transform.position,
             Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z));
         if ((bullet as GameObject).TryGetComponent<Bullet>(out var bullet1))
         {
@@ -58,7 +62,7 @@ public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
 
     public IEnumerator Attack()
     {
-        var bullet = Instantiate(Resources.Load("Prefabs/PlayerBullets/Bullet"), transform.position,
+        var bullet = Instantiate(Resources.Load($"Prefabs/PlayerBullets/{powerUpBullets[powerLevel]}"), transform.position,
             Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z));
         if ((bullet as GameObject).TryGetComponent<Bullet>(out var bullet1))
         {
@@ -66,5 +70,10 @@ public class PlayerAttack : MonoBehaviour, IPlayerAttackInput, IPlayerAttack
         }
         yield return new WaitForSeconds(AttackCooltime * 6.6f);
         curAttackCoroutine = null;
+    }
+
+    public void PowerChange(IPowerUpProvider powerUpProvider)
+    {
+        powerLevel += powerUpProvider.PowerAmount;
     }
 }
