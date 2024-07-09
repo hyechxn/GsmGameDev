@@ -1,8 +1,12 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+/// <summary>
+/// 작성자 : 나혜찬
+/// </summary>
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] float spawnDelay;
@@ -11,37 +15,34 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float waveDelay;
     public float WaveDelay => waveDelay;
 
-
-
+    [SerializeField] EnemyOrderSO[] enemyOrders;
+    public EnemyOrderSO[] EnemyOrders => enemyOrders;
     private void Start()
     {
-        var path = Path.Combine("Assets/Data", "EnemySpawnLogic.txt");
-
-        string[] lines = File.ReadAllLines(path);
-
-        StartCoroutine(Spawn(lines));
-
+        StartCoroutine(Spawn());
     }
 
-    IEnumerator Spawn(string[] enemyList)
+    IEnumerator Spawn()
     {
-        for (int y = 0; y < enemyList.Length; ++y)
+        for (int x = 0; x < enemyOrders.Length; x++)
         {
-            Debug.Log($"{y + 1}번 웨이브");
-            for (int x = 0; x < enemyList[y].Length; ++x)
+            for (int y = 0; y < enemyOrders[x].Enemies.Length; y++)
             {
-                switch (enemyList[y][x])
-                {
-                    case '1':
-                        Instantiate(Resources.Load("Prefabs/Enemys/EnemyS"), transform.position, Quaternion.identity);
-                        break;
-                    case '2':
-                        Instantiate(Resources.Load("Prefabs/Enemys/EnemyM"), transform.position, Quaternion.identity);
-                        break;
-                }
+                Instantiate(enemyOrders[x].Enemies[y], GetOutScreenRandomPosition(), Quaternion.identity);
+
                 yield return new WaitForSeconds(SpawnDelay);
             }
             yield return new WaitForSeconds(WaveDelay);
         }
+    }
+
+    public Vector3 GetOutScreenRandomPosition()
+    {
+        float widthScale = (float)Screen.width / Screen.height;
+        float length = Mathf.Sqrt(Mathf.Pow(Camera.main.orthographicSize, 2) + Mathf.Pow(Camera.main.orthographicSize * widthScale, 2)) + 1f;
+
+        Vector2 randomPosition = Random.insideUnitCircle.normalized * length;
+
+        return randomPosition;
     }
 }
