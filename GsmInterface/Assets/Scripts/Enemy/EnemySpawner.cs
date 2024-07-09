@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -10,8 +9,6 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] float waveDelay;
     public float WaveDelay => waveDelay;
-
-
 
     private void Start()
     {
@@ -27,21 +24,35 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int y = 0; y < enemyList.Length; ++y)
         {
-            Debug.Log($"{y + 1}번 웨이브");
             for (int x = 0; x < enemyList[y].Length; ++x)
             {
+                string spawnEnemyName = "Enemy";
+
                 switch (enemyList[y][x])
                 {
                     case '1':
-                        Instantiate(Resources.Load("Prefabs/Enemys/EnemyS"), transform.position, Quaternion.identity);
+                        spawnEnemyName = "EnemyS";
                         break;
+
                     case '2':
-                        Instantiate(Resources.Load("Prefabs/Enemys/EnemyM"), transform.position, Quaternion.identity);
+                        spawnEnemyName = "EnemyM";
                         break;
                 }
+                Instantiate(Resources.Load($"Prefabs/Enemies/{spawnEnemyName}"), GetOutScreenRandomPosition(), Quaternion.identity);
+
                 yield return new WaitForSeconds(SpawnDelay);
             }
             yield return new WaitForSeconds(WaveDelay);
         }
+    }
+
+    public Vector3 GetOutScreenRandomPosition()
+    {
+        float widthScale = (float)Screen.width / Screen.height;
+        float length = Mathf.Sqrt(Mathf.Pow(Camera.main.orthographicSize, 2) + Mathf.Pow(Camera.main.orthographicSize * widthScale, 2)) + 1f;
+
+        Vector2 direction = Random.insideUnitCircle.normalized * length;
+
+        return direction;
     }
 }
