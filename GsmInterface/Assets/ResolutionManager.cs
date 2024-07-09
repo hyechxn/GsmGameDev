@@ -21,14 +21,7 @@ public class ResolutionManager : MonoBehaviour
 
     void InitUI()
     {
-        for (int i = 0; i < Screen.resolutions.Length; i++)
-        {
-            if (Mathf.RoundToInt((float)Screen.resolutions[i].refreshRateRatio.value) == 60)
-            {
-                resolutionList.Add(Screen.resolutions[i]);
-            }
-        }
-
+        resolutionList.AddRange(Screen.resolutions);
         resolutionDropDown.options.Clear();
 
         int optionNumber = 0;
