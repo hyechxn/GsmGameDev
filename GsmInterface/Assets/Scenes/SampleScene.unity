@@ -1244,6 +1244,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 2.5
   waveDelay: 10
+  enemyOrders:
+  - {fileID: 11400000, guid: 33df19a1b1a023943ae35397fc2f3ea6, type: 2}
+  - {fileID: 11400000, guid: 57d9ac70981d18a4f820354403433ab2, type: 2}
+  - {fileID: 11400000, guid: a2137bba6ece7de41924f377f91e20d0, type: 2}
+  - {fileID: 11400000, guid: 3557d8cd71142e047a162ab03939a605, type: 2}
 --- !u!1 &1281965764
 GameObject:
   m_ObjectHideFlags: 0

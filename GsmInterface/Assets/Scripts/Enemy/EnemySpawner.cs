@@ -1,7 +1,12 @@
+using System;
 using System.Collections;
 using System.IO;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+/// <summary>
+/// 작성자 : 나혜찬
+/// </summary>
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] float spawnDelay;
@@ -10,35 +15,20 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float waveDelay;
     public float WaveDelay => waveDelay;
 
+    [SerializeField] EnemyOrderSO[] enemyOrders;
+    public EnemyOrderSO[] EnemyOrders => enemyOrders;
     private void Start()
     {
-        var path = Path.Combine("Assets/Data", "EnemySpawnLogic.txt");
-
-        string[] lines = File.ReadAllLines(path);
-
-        StartCoroutine(Spawn(lines));
-
+        StartCoroutine(Spawn());
     }
 
-    IEnumerator Spawn(string[] enemyList)
+    IEnumerator Spawn()
     {
-        for (int y = 0; y < enemyList.Length; ++y)
+        for (int x = 0; x < enemyOrders.Length; x++)
         {
-            for (int x = 0; x < enemyList[y].Length; ++x)
+            for (int y = 0; y < enemyOrders[x].Enemies.Length; y++)
             {
-                string spawnEnemyName = "Enemy";
-
-                switch (enemyList[y][x])
-                {
-                    case '1':
-                        spawnEnemyName = "EnemyS";
-                        break;
-
-                    case '2':
-                        spawnEnemyName = "EnemyM";
-                        break;
-                }
-                Instantiate(Resources.Load($"Prefabs/Enemies/{spawnEnemyName}"), GetOutScreenRandomPosition(), Quaternion.identity);
+                Instantiate(enemyOrders[x].Enemies[y], GetOutScreenRandomPosition(), Quaternion.identity);
 
                 yield return new WaitForSeconds(SpawnDelay);
             }
@@ -51,8 +41,8 @@ public class EnemySpawner : MonoBehaviour
         float widthScale = (float)Screen.width / Screen.height;
         float length = Mathf.Sqrt(Mathf.Pow(Camera.main.orthographicSize, 2) + Mathf.Pow(Camera.main.orthographicSize * widthScale, 2)) + 1f;
 
-        Vector2 direction = Random.insideUnitCircle.normalized * length;
+        Vector2 randomPosition = Random.insideUnitCircle.normalized * length;
 
-        return direction;
+        return randomPosition;
     }
 }
